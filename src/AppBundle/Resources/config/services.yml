@@ -1,0 +1,7 @@
+services:
+    cache_service:
+        class:    AppBundle\Services\CacheService
+    storage_mapper:
+        class:      AppBundle\Services\StorageMapper
+        calls:
+            - [setCacheService,   ["@cache_service"]]
