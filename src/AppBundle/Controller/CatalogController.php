@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,23 +91,14 @@ class CatalogController extends Controller
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     private function getCategories()
     {
-        return array(
-            1 => array('id' => 1, 'label' => 'Phones', 'parent' => null),
-            2 => array('id' => 2, 'label' => 'Computers', 'parent' => null),
-            3 => array('id' => 3, 'label' => 'Tablets', 'parent' => null),
-            4 => array('id' => 4, 'label' => 'Desktop', 'parent' => array(
-                'id' => 2,
-                'label' => 'Computers')
-                ),
-            5 => array('id' => 5, 'label' => 'Laptop', 'parent' => array(
-                'id' => 2,
-                'label' => 'Computers')
-            )
-        );
+        $entityManager = $this->getDoctrine()->getManager();
+        $categoryRepository = $entityManager->getRepository(Category::REPOSITORY);
+        $categories = $categoryRepository->findAll();
+        return $categories;
     }
 
     /**
@@ -134,12 +126,15 @@ class CatalogController extends Controller
     {
         $tree = array();
         foreach ($categories as $category) {
-            $parentNode = !$parentId && !$category['parent'];
-            $childNode = $parentId && $category['parent']
-                && $category['parent']['id'] === $parentId;
+            $parentNode = !$parentId && !$category->getParentCategory();
+            $childNode = $parentId && $category->getParentCategory() &&
+                $category->getParentCategory()->getId() === $parentId;
             if ($parentNode || $childNode) {
-                $category['children'] = $this->buildTree($categories, $category['id']);
-                $tree[$category['id']] = $category;
+                $children = $this->buildTree($categories, $category->getId());
+                $tree[$category->getId()] = array(
+                    'category' => $category,
+                    'children' => $children
+                );
             }
         }
         return $tree;
