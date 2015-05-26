@@ -30,6 +30,14 @@ class CatalogController extends Controller
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function jsonTreeCategoriesAction()
+    {
+        return new JsonResponse($this->buildTree($this->getCategories()));
+    }
+
+    /**
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -37,7 +45,7 @@ class CatalogController extends Controller
     public function treeCategoriesAction(Request $request)
     {
         if ($request->getContentType() === 'json') {
-            return new JsonResponse($this->getCategories());
+            return $this->jsonTreeCategoriesAction();
         }
         $arguments = array('categories' => $this->buildTree($this->getCategories()));
         return $this->render('catalog/category/tree.html.twig', $arguments);
