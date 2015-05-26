@@ -9,7 +9,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $a = 0;
         return $this->render('default/index.html.twig');
+    }
+
+    public function phpInfoAction()
+    {
+        return phpinfo();
     }
 }

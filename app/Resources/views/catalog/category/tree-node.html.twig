@@ -11,8 +11,9 @@
         <a href="{{ showUrl }}">{{ category.label }}</a>
     </div>
     <div style="float: right">
-        <a href="{{ editUrl }}" class="ui-button button">Edit</a>
+        <a class="ui-button button" onclick="editModal('{{ editUrl }}')">Edit</a>
     </div>
+    <div id="modal"></div>
     {% if category.children is not empty %}
         <ul style="width: 200px">
             {% for child in category.children %}
@@ -23,4 +24,3 @@
     {% endif %}
     <div style="clear: both"></div>
 </li>
-
