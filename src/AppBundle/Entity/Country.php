@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Country
 {
+    const REPOSITORY = 'AppBundle:Country';
+
     /**
      * @var integer
      *

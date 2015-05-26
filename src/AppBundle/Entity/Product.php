@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+    const REPOSITORY = 'AppBundle:Product';
+
     /**
      * @var integer
      *

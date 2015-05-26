@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Order
 {
+    const REPOSITORY = 'AppBundle:Order';
+
     /**
      * @var integer
      *

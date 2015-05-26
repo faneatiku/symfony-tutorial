@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    const REPOSITORY = 'AppBundle:Category';
+
     /**
      * @var integer
      *

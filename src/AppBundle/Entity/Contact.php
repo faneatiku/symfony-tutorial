@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contact
 {
+    const REPOSITORY = 'AppBundle:Contact';
+
     /**
      * @var integer
      *
