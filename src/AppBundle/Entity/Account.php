@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Account
@@ -34,14 +34,14 @@ class Account
     private $login;
 
     /**
-     * @var string
+     * @var string $password
      * @Assert\Password()
      * @ORM\Column(name="password", type="string", length=100, nullable=true)
      */
     private $password;
 
     /**
-     * @var string
+     * @var string $email
      * @Assert\Email()
      * @ORM\Column(name="email", type="string", length=45, nullable=true)
      */

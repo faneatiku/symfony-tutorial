@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Order')->findAll();
+        $entities = $em->getRepository(Order::REPOSITORY)->findAll();
 
         return $this->render('AppBundle:Order:index.html.twig', array(
             'entities' => $entities,
